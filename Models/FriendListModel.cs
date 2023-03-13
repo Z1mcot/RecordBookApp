@@ -1,14 +1,16 @@
-﻿using RecordBookApp.Services;
+﻿using RecordBookApp.Interfaces;
+using RecordBookApp.Services;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using static System.Windows.Forms.ListView;
 
 namespace RecordBookApp.Models
 {
-    public class FriendListModel
+    public class FriendListModel : ICrudModel<Friend>
     {
         FileService<Friend> _fileService;
         readonly List<Friend> _friendsList;
@@ -21,16 +23,16 @@ namespace RecordBookApp.Models
             _friendsList = _fileService.ReadFromFile("friends.txt");
         }
 
-        public void CreateEntry(Friend newFriend)
+        public void CreateEntry(Friend newEntry)
         {
-            _friendsList.Add(newFriend);
+            _friendsList.Add(newEntry);
             _fileService.WriteToFile(_friendsList, "friends.txt");
         }
 
-        public void UpdateEntry(Friend oldFriend, Friend modifiedFriend)
+        public void UpdateEntry(Friend oldEntry, Friend modifiedEntry)
         {
-            RemoveEntryFromList(oldFriend);
-            CreateEntry(modifiedFriend);
+            RemoveEntryFromList(oldEntry);
+            CreateEntry(modifiedEntry);
         }
 
 
@@ -49,9 +51,9 @@ namespace RecordBookApp.Models
             }
         }
 
-        public void DeleteEntry(ListView.SelectedListViewItemCollection selectedItems)
+        public void DeleteEntry(SelectedListViewItemCollection selectedEntries)
         {
-            foreach (ListViewItem item in selectedItems)
+            foreach (ListViewItem item in selectedEntries)
             { 
                 var friendToRemove = new Friend(item);
                 RemoveEntryFromList(friendToRemove);
