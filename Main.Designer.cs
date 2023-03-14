@@ -62,6 +62,7 @@
             this.ToDiaryBtn.TabIndex = 2;
             this.ToDiaryBtn.Text = "Ежедневник";
             this.ToDiaryBtn.UseVisualStyleBackColor = true;
+            this.ToDiaryBtn.Click += new System.EventHandler(this.ToDiaryBtn_Click);
             // 
             // ToRemindersBtn
             // 
@@ -71,6 +72,7 @@
             this.ToRemindersBtn.TabIndex = 3;
             this.ToRemindersBtn.Text = "Напоминания";
             this.ToRemindersBtn.UseVisualStyleBackColor = true;
+            this.ToRemindersBtn.Click += new System.EventHandler(this.ToRemindersBtn_Click);
             // 
             // Main
             // 

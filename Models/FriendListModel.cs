@@ -1,38 +1,37 @@
 ﻿using RecordBookApp.Interfaces;
 using RecordBookApp.Services;
-using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
-using static System.Windows.Forms.ListView;
 
 namespace RecordBookApp.Models
 {
     public class FriendListModel : ICrudModel<Friend>
     {
-        FileService<Friend> _fileService;
+        readonly FileService<Friend> _fileService;
         readonly List<Friend> _friendsList;
+        readonly string _fileName = "friends.txt";
 
         public List<Friend> FriendsList => _friendsList;
 
         public FriendListModel()
         {
-            _fileService = new FileService<Friend>("../../io");
-            _friendsList = _fileService.ReadFromFile("friends.txt");
+            _fileService = new FileService<Friend>();
+            _friendsList = _fileService.ReadFromFile(_fileName);
         }
 
         public void CreateEntry(Friend newEntry)
         {
             _friendsList.Add(newEntry);
-            _fileService.WriteToFile(_friendsList, "friends.txt");
+            _fileService.WriteToFile(_friendsList, _fileName);
         }
 
         public void UpdateEntry(Friend oldEntry, Friend modifiedEntry)
         {
-            RemoveEntryFromList(oldEntry);
-            CreateEntry(modifiedEntry);
+            int entryIndex = _friendsList.IndexOf(oldEntry);
+            _friendsList[entryIndex] = modifiedEntry;
+            _fileService.WriteToFile(_friendsList, _fileName);
         }
 
 
@@ -51,19 +50,14 @@ namespace RecordBookApp.Models
             }
         }
 
-        public void DeleteEntry(SelectedListViewItemCollection selectedEntries)
+        public void DeleteEntries(ICollection selectedEntries)
         {
             foreach (ListViewItem item in selectedEntries)
-            { 
+            {
                 var friendToRemove = new Friend(item);
-                RemoveEntryFromList(friendToRemove);
-                _fileService.WriteToFile(_friendsList, "friends.txt");
+                _friendsList.Remove(friendToRemove);
+                _fileService.WriteToFile(_friendsList, _fileName);
             }
-        }
-
-        private void RemoveEntryFromList(Friend entry)
-        {
-            _friendsList.Remove(entry);
         }
     }
 }

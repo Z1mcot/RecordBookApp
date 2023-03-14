@@ -1,9 +1,5 @@
-﻿using System;
+﻿using System.Collections;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using static System.Windows.Forms.ListView;
 
 namespace RecordBookApp.Interfaces
 {
@@ -11,7 +7,7 @@ namespace RecordBookApp.Interfaces
     {
         void CreateEntry(T newEntry);
         void UpdateEntry(T oldEntry, T modifiedEntry);
-        void DeleteEntry(SelectedListViewItemCollection selectedEntries);
+        void DeleteEntries(ICollection selectedEntries);
         List<T> FindEntry(string queredParameter, string query);
     }
 }

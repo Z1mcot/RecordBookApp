@@ -1,17 +1,14 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.IO;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace RecordBookApp.Services
 {
     public class FileService<T> where T : new()
     {
-        string _workingDirectory;
+        readonly string _workingDirectory;
 
-        public FileService(string workingDirectory)
+        public FileService(string workingDirectory = "../../io")
         {
             if (!Directory.Exists(workingDirectory))
             {

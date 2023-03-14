@@ -1,59 +1,55 @@
 ﻿using RecordBookApp.Models;
 using System;
 using System.Collections.Generic;
-using System.ComponentModel;
 using System.Data;
-using System.Drawing;
+using System.Globalization;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
-using System.Windows.Forms.VisualStyles;
 
-namespace RecordBookApp
+namespace RecordBookApp.Views.Diary
 {
-    public partial class FriendsList : Form
+    public partial class DiaryForm : Form
     {
-        FriendListModel _model;
-        public FriendsList()
+        readonly DiaryModel _model;
+        public DiaryForm()
         {
             InitializeComponent();
             
-            _model = new FriendListModel();
+            _model = new DiaryModel();
             UpdateForm();
         }
 
         public void UpdateForm()
         {
-            List<Friend> friendList = _model.FriendsList;
-            LoadListView(friendList);
+            List<DiaryEntry> diary = _model.DiaryEntriesList;
+            LoadListView(diary);
         }
 
-        private void LoadListView(List<Friend> listToShow)
+        private void LoadListView(List<DiaryEntry> listToShow)
         {
-            FriendsListView.Items.Clear();
-            var orderedList = listToShow.OrderBy(x => x.FullName);
+            DiaryDataGrid.Rows.Clear();
+            var orderedList = listToShow.OrderBy(x => x.EntryDate);
 
             foreach(var item in listToShow)
             {
-                string[] row = { item.FullName, item.BirthDate.Date.ToString(), item.Address, item.PhoneNumber, item.Remark };
-                var listItem = new ListViewItem(row);
-                FriendsListView.Items.Add(listItem);
+                string[] row = { item.EntryDate.Date.ToString(CultureInfo.GetCultureInfo("ru-RU")), item.Content };
+                
+                DiaryDataGrid.Rows.Add(row);
             }
         }
 
         private void DeleteBtn_Click(object sender, EventArgs e)
         {
-            if (FriendsListView.SelectedItems != null)
+            if (DiaryDataGrid.Rows != null)
             {
                 var responce = MessageBox.Show("Вы правда хотите удалить эту запись?", "Подтверждение удаления", MessageBoxButtons.YesNo);
                 if (responce == DialogResult.Yes)
                 {
-                    var selectedItems = FriendsListView.SelectedItems;
-                    _model.DeleteEntry(selectedItems);
+                    var selectedItems = DiaryDataGrid.SelectedRows;
+                    _model.DeleteEntries(selectedItems);
                 }
 
-                var updatedList = _model.FriendsList;
+                var updatedList = _model.DiaryEntriesList;
                 LoadListView(updatedList);
             }
         }
@@ -69,15 +65,15 @@ namespace RecordBookApp
 
         private void CreateBtn_Click(object sender, EventArgs e)
         {
-            var createForm = new CreateUpdateFriendForm(this, _model);
+            var createForm = new CreateUpdateDiaryEntryForm(this, _model);
             createForm.Show();
         }
 
         private void UpdateBtn_Click(object sender, EventArgs e)
         {
-            ListViewItem selectedItem = FriendsListView.SelectedItems[0];
+            var selectedItem = DiaryDataGrid.SelectedRows[0];
 
-            var createForm = new CreateUpdateFriendForm(this, _model, selectedItem);
+            var createForm = new CreateUpdateDiaryEntryForm(this, _model, selectedItem);
             createForm.Show();
         }
     }

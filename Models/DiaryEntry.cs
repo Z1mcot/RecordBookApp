@@ -1,9 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Net;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace RecordBookApp.Models
@@ -27,7 +23,7 @@ namespace RecordBookApp.Models
             _content = content;
         }
 
-        public DiaryEntry(ListViewItem listViewItem) : this(ListViewItemToString(listViewItem)) { }
+        public DiaryEntry(DataGridViewRow listViewItem) : this(DataGridItemToString(listViewItem)) { }
 
         public DiaryEntry(string rawData)
         {
@@ -39,12 +35,36 @@ namespace RecordBookApp.Models
 
         }
 
-        private static string ListViewItemToString(ListViewItem item)
+        public override string ToString()
+        {
+            return string.Join(";", EntryDate.ToString(), Content);
+        }
+
+        public override bool Equals(object obj)
+        {
+            try
+            {
+                var diaryEntry = (DiaryEntry)obj;
+                return diaryEntry.EntryDate.Date.ToString() == EntryDate.Date.ToString()
+                    && diaryEntry.Content == Content;
+            }
+            catch
+            {
+                return false;
+            }
+        }
+
+        public override int GetHashCode()
+        {
+            return base.GetHashCode();
+        }
+
+        private static string DataGridItemToString(DataGridViewRow item)
         {
             List<string> unpackedListViewItem = new List<string>();
-            foreach (ListViewItem.ListViewSubItem subItem in item.SubItems)
+            foreach (DataGridViewCell subItem in item.Cells)
             {
-                unpackedListViewItem.Add(subItem.Text);
+                unpackedListViewItem.Add((string)subItem.Value);
             }
 
             return string.Join(";", unpackedListViewItem);

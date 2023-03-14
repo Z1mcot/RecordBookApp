@@ -1,4 +1,4 @@
-﻿namespace RecordBookApp
+﻿namespace RecordBookApp.Views.FriendsList
 {
     partial class CreateUpdateFriendForm
     {

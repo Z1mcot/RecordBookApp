@@ -1,6 +1,6 @@
-﻿namespace RecordBookApp
+﻿namespace RecordBookApp.Views.Reminders 
 {
-    partial class FriendsList
+    partial class RemindersForm
     {
         /// <summary>
         /// Required designer variable.
@@ -28,12 +28,9 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.FriendsListView = new System.Windows.Forms.ListView();
-            this.FullNameHeader = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
-            this.BirthDateHeader = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
-            this.AddressHeader = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
-            this.PhoneNumberHeader = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
-            this.RemarkHeader = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.RemindersListView = new System.Windows.Forms.ListView();
+            this.EventDateHeader = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.DescriptionHeader = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.CreateBtn = new System.Windows.Forms.Button();
             this.DeleteBtn = new System.Windows.Forms.Button();
             this.UpdateBtn = new System.Windows.Forms.Button();
@@ -42,46 +39,29 @@
             this.SearchBox = new System.Windows.Forms.TextBox();
             this.SuspendLayout();
             // 
-            // FriendsListView
+            // RemindersListView
             // 
-            this.FriendsListView.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
-            this.FullNameHeader,
-            this.BirthDateHeader,
-            this.AddressHeader,
-            this.PhoneNumberHeader,
-            this.RemarkHeader});
-            this.FriendsListView.HideSelection = false;
-            this.FriendsListView.Location = new System.Drawing.Point(12, 54);
-            this.FriendsListView.Name = "FriendsListView";
-            this.FriendsListView.Size = new System.Drawing.Size(776, 399);
-            this.FriendsListView.TabIndex = 0;
-            this.FriendsListView.UseCompatibleStateImageBehavior = false;
-            this.FriendsListView.View = System.Windows.Forms.View.Details;
+            this.RemindersListView.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
+            this.EventDateHeader,
+            this.DescriptionHeader});
+            this.RemindersListView.GridLines = true;
+            this.RemindersListView.HideSelection = false;
+            this.RemindersListView.Location = new System.Drawing.Point(12, 54);
+            this.RemindersListView.Name = "RemindersListView";
+            this.RemindersListView.Size = new System.Drawing.Size(776, 399);
+            this.RemindersListView.TabIndex = 0;
+            this.RemindersListView.UseCompatibleStateImageBehavior = false;
+            this.RemindersListView.View = System.Windows.Forms.View.Details;
             // 
-            // FullNameHeader
+            // EventDateHeader
             // 
-            this.FullNameHeader.Text = "ФИО";
-            this.FullNameHeader.Width = 200;
+            this.EventDateHeader.Text = "Дата события";
+            this.EventDateHeader.Width = 150;
             // 
-            // BirthDateHeader
+            // DescriptionHeader
             // 
-            this.BirthDateHeader.Text = "Дата рождения";
-            this.BirthDateHeader.Width = 100;
-            // 
-            // AddressHeader
-            // 
-            this.AddressHeader.Text = "Адрес";
-            this.AddressHeader.Width = 180;
-            // 
-            // PhoneNumberHeader
-            // 
-            this.PhoneNumberHeader.Text = "Номер телефона";
-            this.PhoneNumberHeader.Width = 120;
-            // 
-            // RemarkHeader
-            // 
-            this.RemarkHeader.Text = "Краткий комментарий";
-            this.RemarkHeader.Width = 180;
+            this.DescriptionHeader.Text = "Событие";
+            this.DescriptionHeader.Width = 600;
             // 
             // CreateBtn
             // 
@@ -128,9 +108,9 @@
             this.QueredParameterCmbBx.Font = new System.Drawing.Font("Microsoft Sans Serif", 11F);
             this.QueredParameterCmbBx.FormattingEnabled = true;
             this.QueredParameterCmbBx.Items.AddRange(new object[] {
-            "ФИО",
-            "Телефон",
-            "Адрес"});
+            "",
+            "Дата",
+            "Событие"});
             this.QueredParameterCmbBx.Location = new System.Drawing.Point(12, 16);
             this.QueredParameterCmbBx.Name = "QueredParameterCmbBx";
             this.QueredParameterCmbBx.Size = new System.Drawing.Size(135, 26);
@@ -146,7 +126,7 @@
             this.SearchBox.TabIndex = 6;
             this.SearchBox.WordWrap = false;
             // 
-            // FriendsList
+            // RemindersForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
@@ -157,9 +137,10 @@
             this.Controls.Add(this.UpdateBtn);
             this.Controls.Add(this.DeleteBtn);
             this.Controls.Add(this.CreateBtn);
-            this.Controls.Add(this.FriendsListView);
-            this.Name = "FriendsList";
-            this.Text = "Список друзей";
+            this.Controls.Add(this.RemindersListView);
+            this.Name = "RemindersForm";
+            this.Text = "Напоминания";
+            this.Load += new System.EventHandler(this.RemindersForm_Load);
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -167,12 +148,9 @@
 
         #endregion
 
-        private System.Windows.Forms.ListView FriendsListView;
-        private System.Windows.Forms.ColumnHeader FullNameHeader;
-        private System.Windows.Forms.ColumnHeader BirthDateHeader;
-        private System.Windows.Forms.ColumnHeader AddressHeader;
-        private System.Windows.Forms.ColumnHeader PhoneNumberHeader;
-        private System.Windows.Forms.ColumnHeader RemarkHeader;
+        private System.Windows.Forms.ListView RemindersListView;
+        private System.Windows.Forms.ColumnHeader DescriptionHeader;
+        private System.Windows.Forms.ColumnHeader EventDateHeader;
         private System.Windows.Forms.Button CreateBtn;
         private System.Windows.Forms.Button DeleteBtn;
         private System.Windows.Forms.Button UpdateBtn;

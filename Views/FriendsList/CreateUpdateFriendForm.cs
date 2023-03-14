@@ -1,22 +1,15 @@
 ﻿using RecordBookApp.Models;
 using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 
-namespace RecordBookApp
+namespace RecordBookApp.Views.FriendsList
 {
     public partial class CreateUpdateFriendForm : Form
     {
-        FriendListModel _model;
-        FriendsList _parentForm;
-        Friend _oldFriend;
-        public CreateUpdateFriendForm(FriendsList parentForm, FriendListModel model, ListViewItem oldEntry = default)
+        readonly FriendListModel _model;
+        readonly FriendsListForm _parentForm;
+        readonly Friend _oldFriend;
+        public CreateUpdateFriendForm(FriendsListForm parentForm, FriendListModel model, ListViewItem oldEntry = default)
         {
             InitializeComponent();
             _parentForm = parentForm;

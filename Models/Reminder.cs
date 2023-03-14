@@ -1,14 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Runtime.Remoting.Contexts;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace RecordBookApp.Models
 {
-    internal class Reminder
+    public class Reminder
     {
         readonly DateTime _eventDate;
         readonly string _description;
@@ -37,6 +33,30 @@ namespace RecordBookApp.Models
                 _eventDate = DateTime.Now;
             _description = splitData[1];
 
+        }
+
+        public override string ToString()
+        {
+            return string.Join(";", EventDate.ToString(), Description);
+        }
+
+        public override bool Equals(object obj)
+        {
+            try
+            {
+                var reminder = (Reminder)obj;
+                return reminder.EventDate.ToString() == EventDate.ToString()
+                    && reminder.Description == Description;
+            }
+            catch
+            {
+                return false;
+            }
+        }
+
+        public override int GetHashCode()
+        {
+            return base.GetHashCode();
         }
 
         private static string ListViewItemToString(ListViewItem item)

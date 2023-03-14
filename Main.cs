@@ -1,11 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using RecordBookApp.Views.Diary;
+using RecordBookApp.Views.FriendsList;
+using RecordBookApp.Views.Reminders;
+using System;
 using System.Windows.Forms;
 
 namespace RecordBookApp
@@ -19,8 +15,20 @@ namespace RecordBookApp
 
         private void ToFriendsListBtn_Click(object sender, EventArgs e)
         {
-            var friendsList = new FriendsList();
-            friendsList.Show();
+            var friendsListForm = new FriendsListForm();
+            friendsListForm.Show();
+        }
+
+        private void ToDiaryBtn_Click(object sender, EventArgs e)
+        {
+            var diaryForm = new DiaryForm();
+            diaryForm.Show();
+        }
+
+        private void ToRemindersBtn_Click(object sender, EventArgs e)
+        {
+            var remindersForm = new RemindersForm();
+            remindersForm.Show();
         }
     }
 }
