@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Globalization;
 using System.Windows.Forms;
 
 namespace RecordBookApp.Models
@@ -36,9 +37,11 @@ namespace RecordBookApp.Models
         public Friend(string rawData)
         {
             string[] splitData = rawData.Split(';');
-            
+
+            string[] dateFormats = { "dd.MM.yyyy", "G" };
+
             _fullName = splitData[0];
-            if (!DateTime.TryParse(splitData[1], out _birthDate))
+            if (!DateTime.TryParseExact(splitData[1], dateFormats, null, DateTimeStyles.None, out _birthDate))
                 _birthDate = DateTime.Now;
             _address = splitData[2];
             _phoneNumber = splitData[3];

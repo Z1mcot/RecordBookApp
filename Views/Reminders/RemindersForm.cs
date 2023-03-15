@@ -1,4 +1,5 @@
 ﻿using RecordBookApp.Models;
+using RecordBookApp.Services;
 using System;
 using System.Collections.Generic;
 using System.Data;
@@ -33,7 +34,7 @@ namespace RecordBookApp.Views.Reminders
 
             foreach(var item in listToShow)
             {
-                string[] row = { item.EventDate.ToString(CultureInfo.GetCultureInfo("ru-RU")), item.Description };
+                string[] row = { DateTimeParser.ToStringWithFormat(item.EventDate), item.Description };
                 var listItem = new ListViewItem(row);
                 RemindersListView.Items.Add(listItem);
             }

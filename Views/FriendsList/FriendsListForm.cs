@@ -1,4 +1,5 @@
 ﻿using RecordBookApp.Models;
+using RecordBookApp.Services;
 using System;
 using System.Collections.Generic;
 using System.Data;
@@ -32,7 +33,7 @@ namespace RecordBookApp.Views.FriendsList
 
             foreach(var item in listToShow)
             {
-                string[] row = { item.FullName, item.BirthDate.Date.ToString("d", CultureInfo.GetCultureInfo("ru-RU")), item.Address, item.PhoneNumber, item.Remark };
+                string[] row = { item.FullName, DateTimeParser.ToStringWithFormat(item.BirthDate, "d"), item.Address, item.PhoneNumber, item.Remark };
                 var listItem = new ListViewItem(row);
                 FriendsListView.Items.Add(listItem);
             }

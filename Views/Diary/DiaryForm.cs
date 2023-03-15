@@ -1,4 +1,5 @@
 ﻿using RecordBookApp.Models;
+using RecordBookApp.Services;
 using System;
 using System.Collections.Generic;
 using System.Data;
@@ -32,7 +33,7 @@ namespace RecordBookApp.Views.Diary
 
             foreach(var item in listToShow)
             {
-                string[] row = { item.EntryDate.Date.ToString(CultureInfo.GetCultureInfo("ru-RU")), item.Content };
+                string[] row = { DateTimeParser.ToStringWithFormat(item.EntryDate.Date), item.Content };
                 
                 DiaryDataGrid.Rows.Add(row);
             }
