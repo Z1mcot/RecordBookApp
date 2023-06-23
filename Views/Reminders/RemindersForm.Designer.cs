@@ -44,6 +44,7 @@
             this.RemindersListView.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
             this.EventDateHeader,
             this.DescriptionHeader});
+            this.RemindersListView.FullRowSelect = true;
             this.RemindersListView.GridLines = true;
             this.RemindersListView.HideSelection = false;
             this.RemindersListView.Location = new System.Drawing.Point(12, 54);

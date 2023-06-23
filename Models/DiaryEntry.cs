@@ -1,4 +1,5 @@
-﻿using System;
+﻿using RecordBookApp.Services;
+using System;
 using System.Collections.Generic;
 using System.Windows.Forms;
 
@@ -28,9 +29,9 @@ namespace RecordBookApp.Models
         public DiaryEntry(string rawData)
         {
             string[] splitData = rawData.Split(';');
-
-            if (!DateTime.TryParse(splitData[0], out _entryDate))
-                _entryDate = DateTime.Now;
+            
+            if (!DateTimeParser.TryParse(splitData[0], out _entryDate))
+                  _entryDate = DateTime.Now;
             _content = splitData[1];
 
         }
@@ -45,7 +46,7 @@ namespace RecordBookApp.Models
             try
             {
                 var diaryEntry = (DiaryEntry)obj;
-                return diaryEntry.EntryDate.Date.ToString() == EntryDate.Date.ToString()
+                return diaryEntry.EntryDate.Date == EntryDate.Date
                     && diaryEntry.Content == Content;
             }
             catch

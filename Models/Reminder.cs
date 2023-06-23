@@ -1,4 +1,5 @@
-﻿using System;
+﻿using RecordBookApp.Services;
+using System;
 using System.Collections.Generic;
 using System.Windows.Forms;
 
@@ -29,7 +30,7 @@ namespace RecordBookApp.Models
         {
             string[] splitData = rawData.Split(';');
 
-            if (!DateTime.TryParse(splitData[0], out _eventDate))
+            if (!DateTimeParser.TryParse(splitData[0], out _eventDate))
                 _eventDate = DateTime.Now;
             _description = splitData[1];
 
@@ -45,7 +46,7 @@ namespace RecordBookApp.Models
             try
             {
                 var reminder = (Reminder)obj;
-                return reminder.EventDate.ToString() == EventDate.ToString()
+                return reminder.EventDate == EventDate
                     && reminder.Description == Description;
             }
             catch

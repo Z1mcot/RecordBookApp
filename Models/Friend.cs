@@ -61,7 +61,7 @@ namespace RecordBookApp.Models
             {
                 var friend = (Friend)obj;
                 return friend.FullName == FullName
-                    && friend.BirthDate == BirthDate
+                    && friend.BirthDate.Date == BirthDate.Date
                     && friend.Address == Address
                     && friend.PhoneNumber == PhoneNumber
                     && friend.Remark == Remark;

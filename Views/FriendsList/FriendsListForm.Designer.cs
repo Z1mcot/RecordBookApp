@@ -50,6 +50,7 @@
             this.AddressHeader,
             this.PhoneNumberHeader,
             this.RemarkHeader});
+            this.FriendsListView.FullRowSelect = true;
             this.FriendsListView.GridLines = true;
             this.FriendsListView.HideSelection = false;
             this.FriendsListView.Location = new System.Drawing.Point(12, 54);
